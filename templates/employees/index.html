@@ -1,0 +1,26 @@
+
+{% block title %}
+    Employees
+{% endblock %}
+
+{% block content %}
+{% for employee in employees %}
+    <div class="card mb-5">
+        <div class="card-header">
+            <h3>{{employee.name}}</h3>
+        </div>
+    <div class="card-body">
+        <p class="card-text">{{employee.job | truncatewords:15}}</p>
+        <a href="{{employee.get_absolute_url}}" class="btn btn-primary">Read</a>
+    </div>
+</div>
+{% endfor %}
+<form action="." method="post">
+    {{ question_form.as_p }}
+    {%csrf_token%}
+    <p><input type="submit" value="Send"></p>
+</form>
+{% for i in bound_form%}
+<div class="col-6 col-sm-4">{{i.contact}}</div>
+{% endfor %}
+{% endblock %}
